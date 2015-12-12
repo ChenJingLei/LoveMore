@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Euclidlibrary/Euclidlibrary.iml" filepath="$PROJECT_DIR$/Euclidlibrary/Euclidlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoveMore.iml" filepath="$PROJECT_DIR$/LoveMore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sidelibrary/Sidelibrary.iml" filepath="$PROJECT_DIR$/Sidelibrary/Sidelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
