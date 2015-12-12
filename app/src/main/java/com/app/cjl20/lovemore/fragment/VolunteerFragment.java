@@ -44,11 +44,13 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
         mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(VolunteerFragment.this, "Oh hi!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolunteerFragment.this, "报名成功！！！", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mTitle.setText("Following");
+
+
+        mTitle.setText("志愿者活动");
     }
 
 

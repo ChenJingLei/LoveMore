@@ -175,11 +175,11 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, helpFragment).commit();
                 return helpFragment;
             case FindFragment.FIND:
-                FindFragment findFragment = FindFragment.newInstance(R.layout.fragment_volunteer);
+                FindFragment findFragment = FindFragment.newInstance(R.layout.fragment_find);
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, findFragment).commit();
                 return findFragment;
             case RecordFragment.RECORD:
-                RecordFragment recordFragment = RecordFragment.newInstance(R.layout.fragment_volunteer);
+                RecordFragment recordFragment = RecordFragment.newInstance(R.layout.fragment_record);
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, recordFragment).commit();
                 return recordFragment;
 
