@@ -1,1 +1,1 @@
-include ':app', ':Sidelibrary', ':Euclidlibrary', ':Guillotinelibrary', ':Floatlibrary'
+include ':app', ':Sidelibrary', ':Euclidlibrary', ':Guillotinelibrary', ':Floatlibrary', ':TextViewlibrary'

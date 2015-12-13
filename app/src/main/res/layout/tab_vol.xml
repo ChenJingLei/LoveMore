@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:id="@+id/vol"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="50dp"
-    android:padding="10dp"
-    android:visibility="gone">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/viotv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:text="标题："
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/veditText1"
+        android:layout_toLeftOf="@+id/veditText3"
+        android:layout_toStartOf="@+id/veditText3" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/veditText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/viotv1" />
+        android:layout_toRightOf="@id/viotv1"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/viotv2"
@@ -32,13 +36,16 @@
         android:text="负责人："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/veditText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/veditText1"
         android:layout_toEndOf="@+id/viotv2"
-        android:layout_toRightOf="@+id/viotv2" />
+        android:layout_toRightOf="@+id/viotv2"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/viotv3"
@@ -50,13 +57,16 @@
         android:text="组员："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/veditText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/veditText2"
         android:layout_toEndOf="@+id/viotv3"
-        android:layout_toRightOf="@+id/viotv3" />
+        android:layout_toRightOf="@+id/viotv3"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/viotv4"
@@ -68,29 +78,37 @@
         android:text="日期："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/veditText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/veditText3"
         android:layout_toEndOf="@id/viotv4"
-        android:layout_toRightOf="@id/viotv4" />
+        android:layout_toRightOf="@id/viotv4"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/viotv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/veditText4"
         android:text="电话："
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/veditText5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/veditText5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/veditText4"
         android:layout_toEndOf="@id/viotv5"
-        android:layout_toRightOf="@id/viotv5" />
+        android:layout_toRightOf="@id/viotv5"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <Button
         android:layout_width="wrap_content"

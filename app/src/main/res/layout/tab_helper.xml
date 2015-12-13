@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:id="@+id/helper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_marginTop="50dp"
-    android:padding="10dp"
-    android:visibility="gone">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/h1tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:text="标题："
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignLeft="@+id/h1tv2"
+        android:layout_alignStart="@+id/h1tv2" />
 
-    <EditText
+    <!--<com.cengalabs.flatui.views.FlatEditText-->
+    <!--android:id="@+id/edittext_flat"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="5dp"-->
+    <!--android:maxLines="1"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:hint="Flat"-->
+    <!--android:includeFontPadding="true"-->
+    <!--flatui:fl_fieldStyle="fl_box"-->
+    <!--flatui:fl_theme="@array/orange" />-->
+
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/h1tv1" />
+        android:layout_toRightOf="@id/h1tv1"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange" />
 
     <TextView
         android:id="@+id/h1tv2"
@@ -32,13 +52,16 @@
         android:text="申请受助机构名称："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText1"
         android:layout_toEndOf="@+id/h1tv2"
-        android:layout_toRightOf="@+id/h1tv2" />
+        android:layout_toRightOf="@+id/h1tv2"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/h1tv3"
@@ -50,13 +73,16 @@
         android:text="地址："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/editText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText2"
         android:layout_toEndOf="@+id/h1tv3"
-        android:layout_toRightOf="@+id/h1tv3" />
+        android:layout_toRightOf="@+id/h1tv3"
+        android:layout_margin="5dp"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/h1tv4"
@@ -68,29 +94,37 @@
         android:text="日期："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/editText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:layout_below="@+id/editText3"
         android:layout_toEndOf="@id/h1tv4"
-        android:layout_toRightOf="@id/h1tv4" />
+        android:layout_toRightOf="@id/h1tv4"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <TextView
         android:id="@+id/h1tv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText4"
+        android:layout_alignBottom="@+id/editText5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:text="电话："
         android:textSize="20sp" />
 
-    <EditText
+    <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/editText5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:layout_below="@+id/editText4"
         android:layout_toEndOf="@id/h1tv5"
-        android:layout_toRightOf="@id/h1tv5" />
+        android:layout_toRightOf="@id/h1tv5"
+        flatui:fl_fieldStyle="fl_box"
+        flatui:fl_theme="@array/orange"/>
 
     <Button
         android:layout_width="wrap_content"
