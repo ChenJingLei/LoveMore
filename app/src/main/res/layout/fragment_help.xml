@@ -1,29 +1,62 @@
-<io.codetail.widget.RevealFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/toolbartv"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
-        <TextView
+
+        <TabHost
+            android:id="@+id/tabhost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bbbbbbbbbbbbb"/>
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:scaleType="fitXY"
-                android:id="@+id/image_content"
-                android:src="@drawable/content_films"
+            >
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </FrameLayout>
+                android:layout_height="match_parent"
+                >
+                <!-- TabWidget 的 id 必须是这个‘@android:id/tabs’，否则会抛出错误 -->
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    />
+                <!-- tab对应内容的容器，id必须是‘@android:id/tabcontent’，否则会抛出错误 -->
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <fragment
+                        android:id="@+id/frag1"
+                        android:name="com.app.cjl20.lovemore.fragment.HelperFindFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:layout="@layout/tab_helper" />
+
+                    <fragment
+                        android:id="@+id/frag2"
+                        android:name="com.app.cjl20.lovemore.fragment.VolHelpFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:layout="@layout/tab_vol" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+        </TabHost>
+
+
     </LinearLayout>
 </io.codetail.widget.RevealFrameLayout>

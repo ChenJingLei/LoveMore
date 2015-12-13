@@ -11,6 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Euclidlibrary" />
+            <option value="$PROJECT_DIR$/Floatlibrary" />
+            <option value="$PROJECT_DIR$/Guillotinelibrary" />
             <option value="$PROJECT_DIR$/Sidelibrary" />
             <option value="$PROJECT_DIR$/app" />
           </set>

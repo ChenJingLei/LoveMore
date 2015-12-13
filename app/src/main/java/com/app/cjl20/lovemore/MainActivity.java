@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,7 +38,6 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
     private List<SlideMenuItem> list = new ArrayList<>();
     private ContentFragment contentFragment;
     private ViewAnimator viewAnimator;
-    private int res = R.drawable.content_music;
     private LinearLayout linearLayout;
 
 
@@ -76,7 +74,7 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
         list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(FindFragment.FIND, R.drawable.icn_3);
         list.add(menuItem3);
-        SlideMenuItem menuItem4 = new SlideMenuItem(RecordFragment.RECORD, R.drawable.icn_7);
+        SlideMenuItem menuItem4 = new SlideMenuItem(RecordFragment.RECORD, R.drawable.icn_4);
         list.add(menuItem4);
 //        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.SHOP, R.drawable.icn_5);
 //        list.add(menuItem5);

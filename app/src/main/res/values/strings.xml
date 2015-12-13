@@ -25,4 +25,8 @@
         <item>"Vadim Ooleynik"</item>
     </string-array>
 
+    <string name="profile">PROFILE</string>
+    <string name="feed">FEED</string>
+    <string name="activity">ACTIVITY</string>
+
 </resources>
