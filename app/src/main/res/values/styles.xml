@@ -1,7 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
     <style name="LinearLayout" />
@@ -53,7 +57,9 @@
     <style name="ImageView.Hamburger" parent="Widget.AppCompat.ActionButton">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/abc_action_bar_overflow_padding_start_material</item>
+        <item name="android:layout_marginBottom">
+            @dimen/abc_action_bar_overflow_padding_start_material
+        </item>
     </style>
 
     <style name="ImageView.GuillotineItem">
@@ -67,4 +73,50 @@
         <item name="android:background">@drawable/fab_label_background</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="VerButton">
+        <item name="android:background">@drawable/ver_btn_bg</item>
+        <item name="android:textColor">@drawable/ver_btn_front_style</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">13sp</item>
+
+    </style>
+
+    <style name="MButton">
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:textColor">@drawable/button_font_style</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="iwjobapptheme" parent="@android:style/Theme.Holo.Light">
+
+        <item name="android:actionBarSize">60dp</item>
+
+        <item name="android:actionBarStyle">@style/CustomActionBar</item>
+
+    </style>
+
+    <style name="CustomActionBar" parent="@android:style/Widget.DeviceDefault.ActionBar">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="ActionBarTitle" parent="@android:style/TextAppearance.Holo.Large">
+        <item name="android:textColor">@color/action_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="PopupAnimation" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+
+    </style>
+
 </resources>

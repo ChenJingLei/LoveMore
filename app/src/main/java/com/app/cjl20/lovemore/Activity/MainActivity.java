@@ -1,10 +1,20 @@
-package com.app.cjl20.lovemore;
+package com.app.cjl20.lovemore.Activity;
 
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.os.IResultReceiver;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,14 +23,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.app.cjl20.lovemore.R;
 import com.app.cjl20.lovemore.fragment.ContentFragment;
 import com.app.cjl20.lovemore.fragment.FindFragment;
 import com.app.cjl20.lovemore.fragment.HelpFragment;
+import com.app.cjl20.lovemore.fragment.HelperFindFragment;
 import com.app.cjl20.lovemore.fragment.RecordFragment;
 import com.app.cjl20.lovemore.fragment.VolunteerFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +78,8 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
+
+
     }
 
     private void createMenuList() {
@@ -145,6 +162,98 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
+
+    private ImageView picImg;
+    public static final int SELECT_PIC_BY_TACK_PHOTO = 1;
+    public static final int SELECT_PIC_BY_PICK_PHOTO = 2;
+    private String picPath = "";
+    private Uri photoUri;
+    private static final String IMAGE_FILE_NAME = "photos";
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null && data.getData() != null) {
+            // 点击取消按钮
+            if (resultCode == Activity.RESULT_CANCELED) {
+                return;
+            }
+
+            // 可以使用同一个方法，这里分开写为了防止以后扩展不同的需求
+            switch (requestCode) {
+                case SELECT_PIC_BY_PICK_PHOTO:// 如果是直接从相册获取
+                    doPhoto(requestCode, data);
+                    break;
+                case SELECT_PIC_BY_TACK_PHOTO:// 如果是调用相机拍照时
+                    doPhoto(requestCode, data);
+                    break;
+            }
+        } else if (requestCode == SELECT_PIC_BY_TACK_PHOTO) {
+            File temp = new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME);
+            photoUri = Uri.fromFile(temp);
+            doPhoto(requestCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 选择图片后，获取图片的路径
+     *
+     * @param requestCode
+     * @param data
+     */
+    private void doPhoto(int requestCode, Intent data) {
+        // 从相册取图片，有些手机有异常情况，请注意
+        if (requestCode == SELECT_PIC_BY_PICK_PHOTO) {
+            if (data == null) {
+                Toast.makeText(getApplicationContext(), "选择图片文件出错", Toast.LENGTH_LONG).show();
+                return;
+            }
+            photoUri = data.getData();
+            if (photoUri == null) {
+                Toast.makeText(getApplicationContext(), "选择图片文件出错", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        picPath = photoUri.getPath() + ".jpg";
+        String[] pojo = {MediaStore.MediaColumns.DATA};
+        // The method managedQuery() from the type Activity is deprecated
+        //Cursor cursor = managedQuery(photoUri, pojo, null, null, null);
+        Cursor cursor = getContentResolver().query(photoUri, pojo, null, null, null);
+        if (cursor != null) {
+
+            int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
+            cursor.moveToFirst();
+            picPath = cursor.getString(columnIndex);
+
+            // 4.0以上的版本会自动关闭 (4.0--14;; 4.0.3--15)
+            if (Integer.parseInt(Build.VERSION.SDK) < 14) {
+                cursor.close();
+            }
+        }
+        System.out.println("asdsdddddddddddddddddddddddddddddddddddd" + picPath);
+        // 如果图片符合要求将其上传到服务器
+        if (picPath != null && (picPath.endsWith(".png") ||
+                picPath.endsWith(".PNG") ||
+                picPath.endsWith(".jpg") ||
+                picPath.endsWith(".JPG"))) {
+
+
+            BitmapFactory.Options option = new BitmapFactory.Options();
+            // 压缩图片:表示缩略图大小为原始图片大小的几分之一，1为原图
+            option.inSampleSize = 1;
+            // 根据图片的SDCard路径读出Bitmap
+            Bitmap bm = BitmapFactory.decodeFile(picPath, option);
+            // 显示在图片控件上
+            picImg = (ImageView) findViewById(R.id.picImg);
+            picImg.setImageBitmap(bm);
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "选择图片文件不正确", Toast.LENGTH_LONG).show();
+        }
+
+    }
 
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition, String fragment) {
         View view = findViewById(R.id.content_frame);

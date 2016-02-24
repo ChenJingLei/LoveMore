@@ -41,4 +41,9 @@
     </integer-array>
 
 
+    <color name="bottom_nor">#BCBDBD</color>
+    <color name="bottom_pass">#C5D9FD</color>
+    <color name="action_text">#f98e29</color>
+
+
 </resources>

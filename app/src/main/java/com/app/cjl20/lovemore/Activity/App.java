@@ -1,4 +1,4 @@
-package com.app.cjl20.lovemore;
+package com.app.cjl20.lovemore.Activity;
 
 import android.app.Application;
 import android.graphics.Typeface;

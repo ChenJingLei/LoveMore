@@ -1,0 +1,148 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cjl.iwjob.RegisterActivity">
+
+    <com.app.cjl20.lovemore.views.CircleImg
+        android:id="@+id/avatarImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icno_user" />
+    <!--<ImageView-->
+    <!--android:layout_marginTop="100dp"-->
+    <!--android:id="@+id/icno_user"-->
+    <!--android:layout_width="150dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:src="@drawable/icno_user"/>-->
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatarImg"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/ph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/phoneText"
+            android:layout_alignBottom="@+id/phoneText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="8dp"
+            android:text="手机号"
+            android:textColor="#000"
+            android:textSize="23dp" />
+
+        <EditText
+            android:id="@+id/phoneText"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="7dp"
+            android:layout_toRightOf="@id/ph"
+            android:background="@drawable/bg_edittext"
+            android:singleLine="true"
+            android:text="+86" />
+
+        <Button
+            android:id="@+id/button"
+            style="@style/VerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/phoneText"
+            android:padding="1dp"
+            android:text="获取验证码" />
+
+
+        <TextView
+            android:id="@+id/ne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/verificationText"
+            android:layout_alignBottom="@+id/verificationText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="8dp"
+            android:text="验证码"
+            android:textColor="#000"
+            android:textSize="23dp" />
+
+        <EditText
+            android:id="@+id/verificationText"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/phoneText"
+            android:layout_toRightOf="@id/ne"
+            android:background="@drawable/bg_edittext"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/rg_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/verificationText"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="10dp"
+            android:text="昵称"
+            android:textColor="#000"
+            android:textSize="23dp" />
+
+        <EditText
+            android:id="@+id/rg_username_Text"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/rg_username"
+            android:layout_toLeftOf="@+id/button"
+            android:layout_toStartOf="@+id/button"
+            android:background="@drawable/bg_edittext"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/rg_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rg_username"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="15dp"
+            android:text="密码"
+            android:textColor="#000"
+            android:textSize="23dp" />
+
+        <EditText
+            android:id="@+id/rg_password_Text"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/rg_password"
+            android:layout_toLeftOf="@+id/button"
+            android:layout_toStartOf="@+id/button"
+            android:background="@drawable/bg_edittext"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/registerButton"
+        style="@style/MButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl1"
+        android:layout_marginTop="20dp"
+        android:text="注  册" />
+
+</RelativeLayout>

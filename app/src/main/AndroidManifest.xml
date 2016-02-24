@@ -2,22 +2,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.cjl20.lovemore">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragment.VolunteerFragment">
+
+        <activity android:name=".fragment.VolunteerFragment"/>
+
+        <activity
+            android:name=".Activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.login" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:parentActivityName=".Activity.LoginActivity"
+            android:logo="@drawable/ic_launcher"
+            android:theme="@style/iwjobapptheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.register" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
