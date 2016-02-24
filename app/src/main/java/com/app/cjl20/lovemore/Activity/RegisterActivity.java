@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.app.cjl20.lovemore.R;
+import com.app.cjl20.lovemore.config.NetConfig;
 import com.app.cjl20.lovemore.views.SelectPicPopupWindow;
 import com.app.cjl20.lovemore.Utils.FileUtil;
 import com.app.cjl20.lovemore.model.CheckStatus;
@@ -108,7 +109,7 @@ public class RegisterActivity extends Activity {
                     } else {
                         user.setPhone(phoneText.getText().toString());
                         pd = ProgressDialog.show(mContext, null, "正在获取验证码，请稍候...");
-                        new HttpRequestTask("http://192.168.1.107:10001/user/check", user).execute();
+                        new HttpRequestTask(NetConfig.url + "user/check", user).execute();
                     }
                     break;
                 case R.id.registerButton:
@@ -125,7 +126,7 @@ public class RegisterActivity extends Activity {
                                     phoneText.getText().toString(),
                                     byteArray);
                             pd = ProgressDialog.show(mContext, null, "正在注册，请稍候...");
-                            new HttpRequestTask("http://192.168.1.107:10001/user/register", register).execute();
+                            new HttpRequestTask(NetConfig.url + "user/register", register).execute();
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "验证码错误", Toast.LENGTH_SHORT).show();

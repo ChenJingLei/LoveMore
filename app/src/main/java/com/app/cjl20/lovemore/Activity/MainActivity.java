@@ -35,6 +35,7 @@ import com.app.cjl20.lovemore.fragment.HelperFindFragment;
 import com.app.cjl20.lovemore.fragment.RecordFragment;
 import com.app.cjl20.lovemore.fragment.VolunteerFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -180,14 +181,16 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
 
             // 可以使用同一个方法，这里分开写为了防止以后扩展不同的需求
             switch (requestCode) {
+                case 4:
                 case SELECT_PIC_BY_PICK_PHOTO:// 如果是直接从相册获取
                     doPhoto(requestCode, data);
                     break;
+                case 3:
                 case SELECT_PIC_BY_TACK_PHOTO:// 如果是调用相机拍照时
                     doPhoto(requestCode, data);
                     break;
             }
-        } else if (requestCode == SELECT_PIC_BY_TACK_PHOTO) {
+        } else if (requestCode == SELECT_PIC_BY_TACK_PHOTO || requestCode == 3) {
             File temp = new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME);
             photoUri = Uri.fromFile(temp);
             doPhoto(requestCode, data);
@@ -203,7 +206,7 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
      */
     private void doPhoto(int requestCode, Intent data) {
         // 从相册取图片，有些手机有异常情况，请注意
-        if (requestCode == SELECT_PIC_BY_PICK_PHOTO) {
+        if (requestCode == SELECT_PIC_BY_PICK_PHOTO || requestCode == 4) {
             if (data == null) {
                 Toast.makeText(getApplicationContext(), "选择图片文件出错", Toast.LENGTH_LONG).show();
                 return;
@@ -240,15 +243,18 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
 
             BitmapFactory.Options option = new BitmapFactory.Options();
             // 压缩图片:表示缩略图大小为原始图片大小的几分之一，1为原图
-            option.inSampleSize = 1;
+            option.inSampleSize = 20;
             // 根据图片的SDCard路径读出Bitmap
             Bitmap bm = BitmapFactory.decodeFile(picPath, option);
+            System.out.println(bm.getByteCount());
             // 显示在图片控件上
-            picImg = (ImageView) findViewById(R.id.picImg);
+            if (requestCode == 1 || requestCode == 2) {
+                picImg = (ImageView) findViewById(R.id.picImg);
+            } else if ((requestCode == 3 || requestCode == 4)) {
+                picImg = (ImageView) findViewById(R.id.volpicImg);
+            }
             picImg.setImageBitmap(bm);
             System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-
         } else {
             Toast.makeText(getApplicationContext(), "选择图片文件不正确", Toast.LENGTH_LONG).show();
         }

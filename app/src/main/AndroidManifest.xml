@@ -45,6 +45,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activity.AddRecordActivity"
+            android:theme="@style/MyCustomTheme" />
+
+        <activity android:name=".Activity.FeedbackActivity"/>
     </application>
 
 </manifest>

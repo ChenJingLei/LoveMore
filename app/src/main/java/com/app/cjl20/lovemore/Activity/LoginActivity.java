@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.app.cjl20.lovemore.R;
+import com.app.cjl20.lovemore.config.NetConfig;
 import com.app.cjl20.lovemore.model.User;
 import com.app.cjl20.lovemore.screenmanage.SysApplication;
 
@@ -131,7 +132,7 @@ public class LoginActivity extends ActionBarActivity {
                 restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 User user = new User(name, pwd);
-                final String url = "http://192.168.1.107:10001/user/login";
+                final String url = NetConfig.url + "user/login";
                 System.out.println(user.toString());
                 user = restTemplate.postForObject(url, user, User.class);
                 if (user != null) {

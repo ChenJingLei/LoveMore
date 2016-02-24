@@ -19,12 +19,6 @@
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/right_labels"
-        fab:fab_addButtonColorNormal="@color/white"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_addButtonSize="normal"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        fab:fab_labelsPosition="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -32,24 +26,35 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp">
+        android:layout_marginStart="16dp"
+        fab:fab_addButtonColorNormal="@color/white"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="right">
         <!-- fab:fab_addButtonColorNormal="@color/white"-->
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/loveroad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/find_icon1"
+            fab:fab_size="normal"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="爱心足迹"
-            fab:fab_colorPressed="@color/white_pressed"/>
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@drawable/find_icon1"
+            fab:fab_title="爱心足迹" />
+        <!--android:src="@drawable/find_icon1"-->
+
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/myactivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/find_partner"
+            fab:fab_icon="@drawable/find_partner"
             fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
             fab:fab_size="mini"
-            fab:fab_title="合作伙伴"
-            fab:fab_colorPressed="@color/white_pressed"/>
+            fab:fab_title="合作伙伴" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

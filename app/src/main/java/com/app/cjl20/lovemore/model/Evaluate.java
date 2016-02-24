@@ -8,41 +8,19 @@ import java.util.Arrays;
 
 public class Evaluate {
 
-
-    private Long Id;
-
-    private Byte[] icno;
-
     private String name;
 
     private String content;
 
-    private Byte[] images;
+    private byte[] images;
 
     public Evaluate() {
     }
 
-    public Evaluate(Byte[] icno, String name, String content, Byte[] images) {
-        this.icno = icno;
+    public Evaluate(String name, String content, byte[] images) {
         this.name = name;
         this.content = content;
         this.images = images;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public Byte[] getIcno() {
-        return icno;
-    }
-
-    public void setIcno(Byte[] icno) {
-        this.icno = icno;
     }
 
     public String getName() {
@@ -61,20 +39,18 @@ public class Evaluate {
         this.content = content;
     }
 
-    public Byte[] getImages() {
+    public byte[] getImages() {
         return images;
     }
 
-    public void setImages(Byte[] images) {
+    public void setImages(byte[] images) {
         this.images = images;
     }
 
     @Override
     public String toString() {
         return "Evaluate{" +
-                "Id=" + Id +
-                ", icno=" + Arrays.toString(icno) +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", content='" + content + '\'' +
                 ", images=" + Arrays.toString(images) +
                 '}';

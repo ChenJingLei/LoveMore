@@ -1,7 +1,7 @@
 package com.app.cjl20.lovemore.model;
 
 
-import java.util.Date;
+import java.util.Arrays;
 
 /**
  * Created by cjl20 on 2016/2/17.
@@ -9,24 +9,22 @@ import java.util.Date;
 
 public class Volunteer {
 
-    private Long Id;
-
     private String title;
 
     private String principal;
 
     private String member;
 
-    private Date date;
+    private String date;
 
     private String phone;
 
-    private Byte[] image;
+    private byte[] image;
 
     public Volunteer() {
     }
 
-    public Volunteer(String title, String principal, String member, Date date, String phone, Byte[] image) {
+    public Volunteer(String title, String principal, String member, String date, String phone, byte[] image) {
         this.title = title;
         this.principal = principal;
         this.member = member;
@@ -35,20 +33,12 @@ public class Volunteer {
         this.image = image;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getTitle() {
@@ -75,11 +65,11 @@ public class Volunteer {
         this.member = member;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -94,12 +84,12 @@ public class Volunteer {
     @Override
     public String toString() {
         return "Volunteer{" +
-                "Id=" + Id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", principal='" + principal + '\'' +
                 ", member='" + member + '\'' +
                 ", date=" + date +
                 ", phone='" + phone + '\'' +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
 }

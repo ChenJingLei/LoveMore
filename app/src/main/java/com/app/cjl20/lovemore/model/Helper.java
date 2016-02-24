@@ -1,7 +1,7 @@
 package com.app.cjl20.lovemore.model;
 
 
-import java.util.Date;
+import java.util.Arrays;
 
 /**
  * Created by cjl20 on 2016/2/22.
@@ -9,16 +9,13 @@ import java.util.Date;
 
 public class Helper {
 
-
-    private Long Id;
-
     private String title;
 
     private String origation;
 
     private String address;
 
-    private Date date;
+    private String date;
 
     private String phone;
 
@@ -27,7 +24,7 @@ public class Helper {
     public Helper() {
     }
 
-    public Helper(String title, String origation, String address, Date date, String phone, byte[] image) {
+    public Helper(String title, String origation, String address, String date, String phone, byte[] image) {
         this.title = title;
         this.origation = origation;
         this.address = address;
@@ -42,14 +39,6 @@ public class Helper {
 
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getTitle() {
@@ -76,11 +65,11 @@ public class Helper {
         this.address = address;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -95,12 +84,12 @@ public class Helper {
     @Override
     public String toString() {
         return "Helper{" +
-                "Id=" + Id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", origation='" + origation + '\'' +
                 ", address='" + address + '\'' +
                 ", date=" + date +
                 ", phone='" + phone + '\'' +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
 }
