@@ -9,6 +9,8 @@ import java.util.Arrays;
 
 public class Helper {
 
+    private Long id;
+
     private String title;
 
     private String origation;
@@ -31,6 +33,14 @@ public class Helper {
         this.date = date;
         this.phone = phone;
         this.image = image;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public byte[] getImage() {
@@ -84,12 +94,14 @@ public class Helper {
     @Override
     public String toString() {
         return "Helper{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", origation='" + origation + '\'' +
                 ", address='" + address + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", phone='" + phone + '\'' +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }
+
 }

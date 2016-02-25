@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.app.cjl20.lovemore.Activity.AddRecordActivity;
 import com.app.cjl20.lovemore.Activity.FeedbackActivity;
+import com.app.cjl20.lovemore.Activity.MyActivitiesActivity;
 import com.app.cjl20.lovemore.R;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -91,7 +92,8 @@ public class FindFragment extends Fragment implements ScreenShotable, View.OnCli
                 startActivity(intent);
                 break;
             case R.id.myactivity:
-                System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+                Intent myactivity = new Intent(getActivity(), MyActivitiesActivity.class);
+                startActivity(myactivity);
                 break;
             default:
                 switch (Integer.valueOf(v.getTag().toString())) {

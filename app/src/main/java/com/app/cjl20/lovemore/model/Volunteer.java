@@ -9,6 +9,8 @@ import java.util.Arrays;
 
 public class Volunteer {
 
+    private Long id;
+
     private String title;
 
     private String principal;
@@ -31,6 +33,14 @@ public class Volunteer {
         this.date = date;
         this.phone = phone;
         this.image = image;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public byte[] getImage() {
@@ -84,10 +94,11 @@ public class Volunteer {
     @Override
     public String toString() {
         return "Volunteer{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", principal='" + principal + '\'' +
                 ", member='" + member + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", phone='" + phone + '\'' +
                 ", image=" + Arrays.toString(image) +
                 '}';

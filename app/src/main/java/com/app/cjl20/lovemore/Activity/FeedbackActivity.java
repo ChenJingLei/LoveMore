@@ -16,7 +16,7 @@ import com.app.cjl20.lovemore.model.Feedback;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.logging.Handler;
+import android.os.Handler;
 
 /**
  * Created by cjl20 on 2016/2/25.
@@ -91,7 +91,7 @@ public class FeedbackActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    android.os.Handler handler = new android.os.Handler(new android.os.Handler.Callback() {
+    Handler handler = new Handler(new android.os.Handler.Callback() {
 
         @Override
         public boolean handleMessage(Message msg) {

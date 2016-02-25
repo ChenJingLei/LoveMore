@@ -36,37 +36,34 @@
                 android:textSize="@dimen/guillotine_item_text_size" />
         </android.support.v7.widget.Toolbar>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@android:id/list"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <ImageView
-                    style="@style/ImageView.ContentItem"
-                    android:layout_marginTop="@dimen/guillotine_medium_margin"
-                    android:src="@drawable/content3" />
+                android:layout_height="match_parent" />
+            <!--<ImageView-->
+            <!--style="@style/ImageView.ContentItem"-->
+            <!--android:src="@drawable/content3" />-->
 
-                <ImageView
-                    style="@style/ImageView.ContentItem"
-                    android:src="@drawable/content5" />
+            <!--<ImageView-->
+            <!--style="@style/ImageView.ContentItem"-->
+            <!--android:src="@drawable/content5" />-->
 
-                <ImageView
-                    style="@style/ImageView.ContentItem"
-                    android:src="@drawable/content4" />
+            <!--<ImageView-->
+            <!--style="@style/ImageView.ContentItem"-->
+            <!--android:src="@drawable/content4" />-->
 
-                <ImageView
-                    style="@style/ImageView.ContentItem"
-                    android:src="@drawable/content7" />
+            <!--<ImageView-->
+            <!--style="@style/ImageView.ContentItem"-->
+            <!--android:src="@drawable/content7" />-->
 
-                <ImageView
-                    style="@style/ImageView.ContentItem"
-                    android:src="@drawable/content6" />
-            </LinearLayout>
-
-
-        </ScrollView>
-
+            <!--<ImageView-->
+            <!--style="@style/ImageView.ContentItem"-->
+            <!--android:src="@drawable/content6" />-->
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

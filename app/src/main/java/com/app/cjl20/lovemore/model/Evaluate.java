@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 public class Evaluate {
 
+    private byte[] icno;
+
     private String name;
 
     private String content;
@@ -15,6 +17,13 @@ public class Evaluate {
     private byte[] images;
 
     public Evaluate() {
+    }
+
+    public Evaluate(byte[] icno, String name, String content, byte[] images) {
+        this.icno = icno;
+        this.name = name;
+        this.content = content;
+        this.images = images;
     }
 
     public Evaluate(String name, String content, byte[] images) {
@@ -47,10 +56,19 @@ public class Evaluate {
         this.images = images;
     }
 
+    public byte[] getIcno() {
+        return icno;
+    }
+
+    public void setIcno(byte[] icno) {
+        this.icno = icno;
+    }
+
     @Override
     public String toString() {
         return "Evaluate{" +
-                "name='" + name + '\'' +
+                "icno=" + Arrays.toString(icno) +
+                ", name='" + name + '\'' +
                 ", content='" + content + '\'' +
                 ", images=" + Arrays.toString(images) +
                 '}';
