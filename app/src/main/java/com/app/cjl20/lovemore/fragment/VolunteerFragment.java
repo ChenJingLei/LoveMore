@@ -24,6 +24,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -191,7 +192,13 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 names[i] = v.getPrincipal();
                 short_content[i] = v.getTitle();
                 long_content[i] = v.getMember();
-                String path = Environment.getExternalStorageDirectory() + "/lovemore/volunteer/" + new Date().getTime() + "v" + i + ".jpg";
+                String folder = Environment.getExternalStorageDirectory() + "/lovemore/volunteer/";
+                File file = new File(folder);
+                if (!file.exists() && !file.isDirectory()) {
+                    file.mkdir();
+                }
+                String filename = new Date().getTime() + "v" + i + ".jpg";
+                String path = folder + filename;
                 FileOutputStream fout = new FileOutputStream(path);
                 fout.write(v.getImage(), 0, v.getImage().length);
                 fout.close();
