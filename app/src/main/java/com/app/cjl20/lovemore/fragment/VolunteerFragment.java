@@ -191,7 +191,7 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 names[i] = v.getPrincipal();
                 short_content[i] = v.getTitle();
                 long_content[i] = v.getMember();
-                String path = Environment.getExternalStorageState() + "/lovemore/volunteer/" + new Date().getTime() + "v" + i;
+                String path = Environment.getExternalStorageDirectory() + "/lovemore/volunteer/" + new Date().getTime() + "v" + i + ".jpg";
                 FileOutputStream fout = new FileOutputStream(path);
                 fout.write(v.getImage(), 0, v.getImage().length);
                 fout.close();
