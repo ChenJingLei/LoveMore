@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:layout_below="@id/logRL1"
-                android:text="13004165668"
+                android:text=""
                 android:layout_marginBottom="5dp"
                 android:textColor="#000000"
                 android:singleLine="true" />
@@ -101,7 +101,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_below="@id/nameText"
                 android:background="@null"
-                android:text="cjl"
+                android:text=""
                 android:textColor="#000000"
                 android:singleLine="true" />
 
@@ -116,7 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logRL2"
         android:layout_marginTop="10dp"
-        android:checked="true"
         android:button="@drawable/checkbox_bg" />
 
     <TextView

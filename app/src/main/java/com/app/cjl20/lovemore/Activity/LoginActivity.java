@@ -5,6 +5,7 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +41,9 @@ public class LoginActivity extends ActionBarActivity {
     private Handler pBhandler = null;
     private TextView forgetTV = null;
     private TextView registerTV = null;
+    private CheckBox rememberButton = null;
+
+    private SharedPreferences sp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,34 +66,47 @@ public class LoginActivity extends ActionBarActivity {
         loginBtn.setOnClickListener(new LoginButtonListener());
         forgetTV.setOnClickListener(new LoginViewListener());
         registerTV.setOnClickListener(new LoginViewListener());
+
+        rememberButton = (CheckBox) findViewById(R.id.remberCB);
+
+        sp = this.getSharedPreferences("SP", MODE_PRIVATE);
+
+        Boolean bool = false;
+        bool = sp.getBoolean("isremember", bool);
+        rememberButton.setChecked(bool);
+        String name = "";
+        final String pwd = "";
+        nameText.setText(sp.getString("usernname", name));
+        if (bool) {
+            pwdText.setText(sp.getString("pwd", pwd));
+        } else {
+            pwdText.setText(sp.getString("pwd", ""));
+        }
+
+
+        rememberButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean("isremember", isChecked);
+                editor.putString("usernname", nameText.getText().toString());
+                if (isChecked) {
+                    if (pwdText.getText().toString().equals("")) {
+                        editor.putBoolean("isremember", false);
+                    }
+                    editor.putString("pwd", pwdText.getText().toString());
+
+                } else {
+                    editor.putString("pwd", "");
+                }
+                editor.apply();//保存新数据
+            }
+        });
 //        /*
 //        * 测试程序使用
 //        */
 //        nameText.setText("cjl");
 //        pwdText.setText("cjl");
-
-        loginBtn.callOnClick();
-
-    }
-
-    //此handler处理登陆信息
-    class PbHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            //关闭ProgressDialog
-            System.out.println("msg:" + msg.obj);
-            progressDialog.dismiss();
-            if (msg.obj.getClass() == String.class) {
-                setToast(_setLoginInfo((String) msg.obj));
-            } else if (msg.obj.getClass() == UnknownHostException.class) {
-                Toast.makeText(getApplicationContext(), "提示：网络不可用，或者服务器正在维护中，请稍后再试", Toast.LENGTH_SHORT).show();
-            } else if (msg.obj.getClass() == IOException.class) {
-                Toast.makeText(getApplicationContext(), "提示：网络解析错误", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "提示：未知错误，请稍后重试", Toast.LENGTH_SHORT).show();
-            }
-            super.handleMessage(msg);
-        }
     }
 
     public void setToast(String str) {
@@ -135,17 +154,51 @@ public class LoginActivity extends ActionBarActivity {
                 final String url = NetConfig.url + "user/login";
                 System.out.println(user.toString());
                 user = restTemplate.postForObject(url, user, User.class);
+                /*
+                test
+                 */
                 if (user != null) {
-                    msg.obj = "success";
+                    msg.what = 1;
+                    msg.obj = user;
                 } else {
-                    msg.obj = "fail";
+                    throw new Exception("fail");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                msg.what = 0;
                 msg.obj = e;
             }
             pBhandler.sendMessage(msg);
             super.run();
+        }
+    }
+
+    //此handler处理登陆信息
+    class PbHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            //关闭ProgressDialog
+            System.out.println("msg:" + msg.obj);
+            progressDialog.dismiss();
+            if (msg.what == 1) {
+                NetConfig.loginer = (User) msg.obj;
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean("isremember", rememberButton.isChecked());
+                editor.putString("usernname", nameText.getText().toString());
+                editor.putString("pwd", pwdText.getText().toString());
+                editor.apply();
+                setToast(_setLoginInfo("success"));
+            } else if (msg.what == 0) {
+                if (((Exception) msg.obj).getMessage().equals("fail")) {
+                    setToast(_setLoginInfo("fail"));
+                } else if (msg.obj.getClass() == UnknownHostException.class) {
+                    Toast.makeText(getApplicationContext(), "提示：网络不可用，或者服务器正在维护中，请稍后再试", Toast.LENGTH_SHORT).show();
+                } else if (msg.obj.getClass() == IOException.class) {
+                    Toast.makeText(getApplicationContext(), "提示：网络解析错误", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "提示：未知错误，请稍后重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+            super.handleMessage(msg);
         }
     }
 

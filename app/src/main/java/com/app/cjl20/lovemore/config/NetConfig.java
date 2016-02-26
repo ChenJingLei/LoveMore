@@ -9,4 +9,5 @@ import com.app.cjl20.lovemore.model.User;
 public class NetConfig {
     //    public static final String url = "http://192.168.1.107:10001/";
     public static final String url = "http://115.28.154.158:10001/";
+    public static User loginer;
 }

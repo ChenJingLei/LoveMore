@@ -61,6 +61,8 @@ public abstract class EuclidActivity extends Activity {
     public static ShapeDrawable sOverlayShape;
     static int sScreenWidth;
     static int sProfileImageHeight;
+    protected int mItemPosition;
+
 
     private SwingLeftInAnimationAdapter mListViewAnimationAdapter;
     private ViewAnimator mListViewAnimator;
@@ -82,7 +84,7 @@ public abstract class EuclidActivity extends Activity {
         mWrapper = (RelativeLayout) findViewById(R.id.wrapper);
         mListView = (ListView) findViewById(R.id.list_view);
         mToolbar = (FrameLayout) findViewById(R.id.toolbar_list);
-        mTitle = (TextView)findViewById(R.id.title_following);
+        mTitle = (TextView) findViewById(R.id.title_following);
         mToolbarProfile = (RelativeLayout) findViewById(R.id.toolbar_profile);
         mProfileDetails = (LinearLayout) findViewById(R.id.wrapper_profile_details);
         mTextViewProfileName = (TextView) findViewById(R.id.text_view_profile_name);
@@ -122,6 +124,7 @@ public abstract class EuclidActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mState = EuclidState.Opening;
                 showProfileDetails((Map<String, Object>) parent.getItemAtPosition(position), view);
+                mItemPosition = position;
             }
         });
     }
@@ -159,14 +162,26 @@ public abstract class EuclidActivity extends Activity {
 
         mOverlayListItemView.findViewById(R.id.view_avatar_overlay).setBackground(sOverlayShape);
 
-        Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
+//        Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
+//                .resize(sScreenWidth, sProfileImageHeight).centerCrop()
+//                .placeholder(R.color.blue)
+//                .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_reveal_avatar));
+//
+//        Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
+//                .resize(sScreenWidth, sProfileImageHeight).centerCrop()
+//                .placeholder(R.color.blue)
+//                .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_avatar));
+
+        Picasso.with(EuclidActivity.this).load((String) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_reveal_avatar));
-        Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
+
+        Picasso.with(EuclidActivity.this).load((String) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_avatar));
+
 
         ((TextView) mOverlayListItemView.findViewById(R.id.text_view_name)).setText((String) item.get(EuclidListAdapter.KEY_NAME));
         ((TextView) mOverlayListItemView.findViewById(R.id.text_view_description)).setText((String) item.get(EuclidListAdapter.KEY_DESCRIPTION_SHORT));

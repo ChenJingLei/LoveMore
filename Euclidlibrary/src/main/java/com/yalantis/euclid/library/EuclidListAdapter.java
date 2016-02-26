@@ -47,7 +47,12 @@ public class EuclidListAdapter extends ArrayAdapter<Map<String, Object>> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(getContext()).load((Integer) mData.get(position).get(KEY_AVATAR))
+//        Picasso.with(getContext()).load((Integer) mData.get(position).get(KEY_AVATAR))
+//                .resize(EuclidActivity.sScreenWidth, EuclidActivity.sProfileImageHeight).centerCrop()
+//                .placeholder(R.color.blue)
+//                .into(viewHolder.mListItemAvatar);
+
+        Picasso.with(getContext()).load((String) mData.get(position).get(KEY_AVATAR))
                 .resize(EuclidActivity.sScreenWidth, EuclidActivity.sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into(viewHolder.mListItemAvatar);

@@ -4,13 +4,10 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
@@ -25,12 +22,14 @@ import com.yalantis.euclid.library.EuclidListAdapter;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import java.util.Map;
 
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
@@ -48,6 +47,7 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
         return volunteerFragment;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +55,9 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
         mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Enroll enroll = new Enroll("cjl", 1L);
+                Volunteer volunteer = vollist.get(mItemPosition);
+                System.out.println("选中的item-->" + volunteer.toString());
+                Enroll enroll = new Enroll(NetConfig.loginer.getUsername(), volunteer.getId());
                 pd = ProgressDialog.show(VolunteerFragment.this, null, "正在报名，请稍候...");
                 new HttpRequestTask(NetConfig.url + "activity/enroll", enroll).execute();
 //                Toast.makeText(VolunteerFragment.this, "报名成功！！！", Toast.LENGTH_SHORT).show();
@@ -66,7 +67,7 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
 
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Boolean> {
+    private class HttpRequestTask extends AsyncTask<Void, Void, String> {
 
         String url;
         Enroll enroll;
@@ -77,27 +78,26 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 Boolean bool = restTemplate.postForObject(url, enroll, Boolean.class);
-                return bool;
+                String str = "报名成功";
+                if (!bool) {
+                    str = "不可重复报名";
+                }
+                return str;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                return false;
+                return "报名失败，原因：" + e.getMessage();
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean bool) {
-            if (bool) {
-                Toast.makeText(getApplicationContext(), "报名成功", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "报名失败", Toast.LENGTH_LONG).show();
-                finish();
-            }
+        protected void onPostExecute(String str) {
+            Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
             pd.dismiss();
         }
     }
@@ -172,28 +172,34 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
             String[] names = new String[size];
             String[] short_content = new String[size];
             String[] long_content = new String[size];
-//                byte[][] avatars = new byte[size][];
-            int[] avatars = {
-                    R.drawable.anastasia,
-                    R.drawable.andriy,
-                    R.drawable.dmitriy,
-                    R.drawable.dmitry_96,
-                    R.drawable.ed,
-                    R.drawable.illya,
-                    R.drawable.kirill,
-                    R.drawable.konstantin,
-                    R.drawable.oleksii,
-                    R.drawable.pavel,
-                    R.drawable.vadim};
+            String[] avatarsImg = new String[size];
+//            int[] avatars = {
+//                    R.drawable.anastasia,
+//                    R.drawable.andriy,
+//                    R.drawable.dmitriy,
+//                    R.drawable.dmitry_96,
+//                    R.drawable.ed,
+//                    R.drawable.illya,
+//                    R.drawable.kirill,
+//                    R.drawable.konstantin,
+//                    R.drawable.oleksii,
+//                    R.drawable.pavel,
+//                    R.drawable.vadim};
+
             for (int i = 0; i < size; i++) {
                 Volunteer v = vollist.get(i);
                 names[i] = v.getPrincipal();
                 short_content[i] = v.getTitle();
                 long_content[i] = v.getMember();
+                String path = Environment.getExternalStorageState() + "/lovemore/volunteer/" + new Date().getTime() + "v" + i;
+                FileOutputStream fout = new FileOutputStream(path);
+                fout.write(v.getImage(), 0, v.getImage().length);
+                fout.close();
+                avatarsImg[i] = path;
             }
             for (int i = 0; i < size; i++) {
                 profileMap = new HashMap<>();
-                profileMap.put(EuclidListAdapter.KEY_AVATAR, avatars[i]);
+                profileMap.put(EuclidListAdapter.KEY_AVATAR, avatarsImg[i]);
                 profileMap.put(EuclidListAdapter.KEY_NAME, names[i]);
                 profileMap.put(EuclidListAdapter.KEY_DESCRIPTION_SHORT, short_content[i]);
                 profileMap.put(EuclidListAdapter.KEY_DESCRIPTION_FULL, long_content[i]);

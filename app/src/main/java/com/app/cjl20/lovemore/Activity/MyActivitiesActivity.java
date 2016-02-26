@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by cjl20 on 2016/2/25.
@@ -32,7 +31,9 @@ public class MyActivitiesActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_myactivity);
         pd = ProgressDialog.show(MyActivitiesActivity.this, null, "正在获取内容，请稍候...");
-        GetMyActivityInfoThread thread = new GetMyActivityInfoThread(NetConfig.url + "activity/getActivity/cjl");
+        GetMyActivityInfoThread thread = new GetMyActivityInfoThread(NetConfig.url +
+                "activity/getActivity/" +
+                NetConfig.loginer.getUsername());
         thread.start();
     }
 
