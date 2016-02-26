@@ -192,20 +192,23 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 names[i] = v.getPrincipal();
                 short_content[i] = v.getTitle();
                 long_content[i] = v.getMember();
+
                 String folder = Environment.getExternalStorageDirectory() + "/lovemore/volunteer";
-                String filename = new Date().getTime() + "v" + i + ".jpg";
-                String path = folder + "/" + filename;
-                File file = new File(path);
-                if (!file.exists() && !file.isDirectory()) {
-                    System.out.println(path.toString());
-                    file.createNewFile();
+                File mFolder = new File(folder);
+                if (!mFolder.exists()) {
+                    mFolder.mkdir();
                 }
 
+                String filename = new Date().getTime() + "v" + i + ".jpg";
 
-                FileOutputStream fout = new FileOutputStream(path);
+                File file = new File(mFolder.getAbsolutePath(), filename);
+
+                FileOutputStream fout = new FileOutputStream(file);
+
                 fout.write(v.getImage(), 0, v.getImage().length);
+                fout.flush();
                 fout.close();
-                avatarsImg[i] = path;
+                avatarsImg[i] = folder + "/" + filename;
             }
             for (int i = 0; i < size; i++) {
                 profileMap = new HashMap<>();
