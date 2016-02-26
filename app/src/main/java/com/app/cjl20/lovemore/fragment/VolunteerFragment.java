@@ -197,7 +197,7 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 String path = folder + "/" + filename;
                 File file = new File(path);
                 if (!file.exists() && !file.isDirectory()) {
-                    System.out.println("aaaaaaaaaaaaaaaaaaaa");
+                    System.out.println(path.toString());
                     file.createNewFile();
                 }
 
