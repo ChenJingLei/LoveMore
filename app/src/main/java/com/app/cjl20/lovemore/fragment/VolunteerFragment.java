@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.app.cjl20.lovemore.R;
+import com.app.cjl20.lovemore.Utils.FileUtil;
 import com.app.cjl20.lovemore.config.NetConfig;
 import com.app.cjl20.lovemore.model.Enroll;
 import com.app.cjl20.lovemore.model.Volunteer;
@@ -65,7 +66,9 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
             }
         });
         mTitle.setText("志愿者活动");
-
+        pd = ProgressDialog.show(VolunteerFragment.this, null, "正在获取内容，请稍候...");
+        GetVolInfoThread thread = new GetVolInfoThread(NetConfig.url + "volunteer/getAll");
+        thread.start();
     }
 
     private class HttpRequestTask extends AsyncTask<Void, Void, String> {
@@ -123,10 +126,8 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 Gson gson = new Gson();
                 List<Volunteer> list = gson.fromJson(json, new TypeToken<List<Volunteer>>() {
                 }.getType());
-                System.out.println(list.toString());
                 msg.obj = list;
                 msg.what = 1;
-                vollist.addAll(list);
             } catch (Exception e) {
                 msg.obj = e.getMessage();
                 msg.what = 0;
@@ -142,9 +143,8 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
             pd.dismiss();
             switch (msg.what) {
                 case 1:
-//                    vollist.addAll((List<Volunteer>) msg.obj);
-
-                    System.out.println(vollist.size());
+                    vollist.addAll((List<Volunteer>) msg.obj);
+                    initList();
                     break;
                 case 0:
                     Toast.makeText(getApplicationContext(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
@@ -158,22 +158,15 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
 
     @Override
     protected BaseAdapter getAdapter() {
-        pd = ProgressDialog.show(VolunteerFragment.this, null, "正在获取内容，请稍候...");
         Map<String, Object> profileMap;
         List<Map<String, Object>> profilesList = new ArrayList<>();
-//        Volunteer vol = new Volunteer("aaaaa", "bbbb", "cccc", "dddd", "eeee", new byte[]{1, 2});
-//        vollist.add(vol);
-//        if (vollist != null) {
         try {
-            GetVolInfoThread thread = new GetVolInfoThread(NetConfig.url + "volunteer/getAll");
-            thread.start();
-            thread.join();
             int size = vollist.size();
             System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + size);
             String[] names = new String[size];
             String[] short_content = new String[size];
             String[] long_content = new String[size];
-            String[] avatarsImg = new String[size];
+            File[] avatarsImg = new File[size];
 //            int[] avatars = {
 //                    R.drawable.anastasia,
 //                    R.drawable.andriy,
@@ -192,23 +185,9 @@ public class VolunteerFragment extends EuclidActivity implements ScreenShotable 
                 names[i] = v.getPrincipal();
                 short_content[i] = v.getTitle();
                 long_content[i] = v.getMember();
-
-                String folder = Environment.getExternalStorageDirectory() + "/lovemore/volunteer";
-                File mFolder = new File(folder);
-                if (!mFolder.exists()) {
-                    mFolder.mkdir();
-                }
-
-                String filename = new Date().getTime() + "v" + i + ".jpg";
-
-                File file = new File(mFolder.getAbsolutePath(), filename);
-
-                FileOutputStream fout = new FileOutputStream(file);
-
-                fout.write(v.getImage(), 0, v.getImage().length);
-                fout.flush();
-                fout.close();
-                avatarsImg[i] = folder + "/" + filename;
+                String path = Environment.getExternalStorageDirectory() + "/LoveMore/volunteer";
+                String filename = FileUtil.saveFile(VolunteerFragment.this, path, new Date().getTime() + "v" + i + ".jpg", v.getImage());
+                avatarsImg[i] = new File(filename);
             }
             for (int i = 0; i < size; i++) {
                 profileMap = new HashMap<>();

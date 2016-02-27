@@ -28,6 +28,7 @@ import com.nhaarman.listviewanimations.appearance.ViewAnimator;
 import com.nhaarman.listviewanimations.appearance.simple.SwingLeftInAnimationAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -107,10 +108,10 @@ public abstract class EuclidActivity extends Activity {
         sProfileImageHeight = getResources().getDimensionPixelSize(R.dimen.height_profile_image);
         sOverlayShape = buildAvatarCircleOverlay();
 
-        initList();
+//        initList();
     }
 
-    private void initList() {
+    protected void initList() {
         mListViewAnimationAdapter = new SwingLeftInAnimationAdapter(getAdapter());
         mListViewAnimationAdapter.setAbsListView(mListView);
         mListViewAnimator = mListViewAnimationAdapter.getViewAnimator();
@@ -172,12 +173,12 @@ public abstract class EuclidActivity extends Activity {
 //                .placeholder(R.color.blue)
 //                .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_avatar));
 
-        Picasso.with(EuclidActivity.this).load((String) item.get(EuclidListAdapter.KEY_AVATAR))
+        Picasso.with(EuclidActivity.this).load((File) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_reveal_avatar));
 
-        Picasso.with(EuclidActivity.this).load((String) item.get(EuclidListAdapter.KEY_AVATAR))
+        Picasso.with(EuclidActivity.this).load((File) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_avatar));

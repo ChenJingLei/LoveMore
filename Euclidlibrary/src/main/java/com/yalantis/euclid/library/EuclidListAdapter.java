@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,7 @@ public class EuclidListAdapter extends ArrayAdapter<Map<String, Object>> {
 //                .placeholder(R.color.blue)
 //                .into(viewHolder.mListItemAvatar);
 
-        Picasso.with(getContext()).load((String) mData.get(position).get(KEY_AVATAR))
+        Picasso.with(getContext()).load((File) mData.get(position).get(KEY_AVATAR))
                 .resize(EuclidActivity.sScreenWidth, EuclidActivity.sProfileImageHeight).centerCrop()
                 .placeholder(R.color.blue)
                 .into(viewHolder.mListItemAvatar);
